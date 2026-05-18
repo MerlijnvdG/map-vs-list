@@ -618,20 +618,33 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
           </div>
         </div>
         <div class="chart-wrap">${bigoChart(this._chartData)}</div>
-        <div class="bigo-facts">
-          <div class="fact">
-            <span class="fact-val green">Constant</span>
-            <span class="fact-label">Map blijft altijd even snel, ongeacht n</span>
-          </div>
-          <div class="fact">
-            <span class="fact-val red">${fmtX(this._chartData.at(-1).listMs / this._chartData[0].listMs)}×</span>
-            <span class="fact-label">List werd ~${fmtX(this._chartData.at(-1).listMs / this._chartData[0].listMs)}× langzamer van ${fmtSize(this._chartData[0].size)} naar ${fmtSize(this._chartData.at(-1).size)}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-val green">${Math.round(this._chartData.at(-1).listMs / this._chartData.at(-1).mapMs).toLocaleString('nl')}×</span>
-            <span class="fact-label">Sneller bij ${fmtSize(this._chartData.at(-1).size)} elementen</span>
-          </div>
-        </div>
+        <table class="bigo-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Big O</th>
+              <th>Gemeten 20K</th>
+              <th>Voorspeld 100K</th>
+              <th>Gemeten 100K</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="bt-name map-name">Map</td>
+              <td class="bt-bigo"><span class="bigo-chip map-chip">O(1)</span></td>
+              <td class="bt-val">${fmtMs(this._chartData[1].mapMs)}</td>
+              <td class="bt-val bt-predicted">${fmtMs(this._chartData[1].mapMs)} <span class="bt-why">(×1)</span></td>
+              <td class="bt-val">${fmtMs(this._chartData.at(-1).mapMs)}</td>
+            </tr>
+            <tr>
+              <td class="bt-name list-name">List</td>
+              <td class="bt-bigo"><span class="bigo-chip list-chip">O(n)</span></td>
+              <td class="bt-val">${fmtMs(this._chartData[1].listMs)}</td>
+              <td class="bt-val bt-predicted">${fmtMs(this._chartData[1].listMs * 5)} <span class="bt-why">(×5)</span></td>
+              <td class="bt-val">${fmtMs(this._chartData.at(-1).listMs)}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     `
   }
@@ -1017,15 +1030,25 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
       font-family: system-ui, sans-serif; text-align: center;
     }
     .chart-xtitle { text-align: center; font-size: .73rem; color: #888; margin-top: 3px; padding-right: 11.8%; flex-shrink: 0; }
-    .bigo-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .fact {
-      background: var(--s2); border: 1px solid var(--border); border-radius: 10px;
-      padding: 14px 16px; display: flex; flex-direction: column; gap: 4px;
+    .bigo-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--s2); border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; font-size: .88rem;
     }
-    .fact-val { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
-    .fact-val.green { color: var(--green); }
-    .fact-val.red   { color: var(--red); }
-    .fact-label { font-size: .75rem; color: var(--muted2); line-height: 1.4; }
+    .bigo-table thead tr { border-bottom: 1px solid var(--border); }
+    .bigo-table th {
+      padding: 10px 16px; text-align: left;
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--muted2);
+    }
+    .bigo-table td { padding: 12px 16px; border-top: 1px solid var(--border); }
+    .bigo-table tbody tr:first-child td { border-top: none; }
+    .bt-name { font-weight: 800; font-size: 1rem; }
+    .map-name  { color: var(--accent); }
+    .list-name { color: var(--blue); }
+    .bt-val { font-family: monospace; color: var(--muted3); font-variant-numeric: tabular-nums; }
+    .bt-predicted { color: var(--muted2); }
+    .bt-why { font-size: .75rem; color: var(--muted2); }
 
     /* ── Bronnen ── */
     .bronnen-slide { flex: 1; display: flex; flex-direction: column; gap: 20px; }
