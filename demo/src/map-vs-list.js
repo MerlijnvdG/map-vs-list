@@ -419,7 +419,7 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
   _uitlegWhen() {
     const mapCases = [
       'Snel opzoeken op ID (gebruiker, product)',
-      'Sleutel waarde relaties bewaren',
+      'Snel controleren of iets al bestaat',
       'Voorkomen van dubbele sleutels',
       'Groeperen / tellen per categorie',
     ]
