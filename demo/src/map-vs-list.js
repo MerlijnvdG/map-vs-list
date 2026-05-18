@@ -430,7 +430,7 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
       'Toegang via index nodig',
     ]
     const mapExamples = ['Woordenboek (woord → betekenis)', 'Contacten (naam → telefoonnummer)', 'Rapportcijfers (naam → cijfer)']
-    const listExamples = ['Playlist van muziek', 'Chatberichten', 'Takenlijst']
+    const listExamples = ['Playlist van muziek', 'Chatberichten', 'Wachtrij']
     return html`
       <div class="when-slide fade">
         <div class="slide-tag">Uitleg</div>
