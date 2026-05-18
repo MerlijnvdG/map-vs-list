@@ -38,7 +38,7 @@ const QUIZ_ROUNDS = [
     bench: benchInsert,
     winner: 'List',
     explanation: 'List plakt gewoon achteraan en is daarmee het snelst. Map doet eigenlijk hetzelfde maar moet ook nog een hash berekenen voor elke sleutel, en dat telt flink op als je er een miljoen doet.',
-    bigO: { Map: 'O(1)*', List: 'O(1)' },
+    bigO: { Map: 'O(1)', List: 'O(1)' },
   },
   {
     hint: 'Alle elementen doorlopen',
@@ -46,7 +46,7 @@ const QUIZ_ROUNDS = [
     bench: benchIteration,
     winner: 'List',
     explanation: 'Een List staat netjes op een rij in het geheugen, dus de CPU kan het snel doorlopen. Een Map heeft elk element verspreid liggen met een extra verwijzing ertussen, en dat maakt itereren een stuk trager.',
-    bigO: { Map: 'O(n)', List: 'O(n)*' },
+    bigO: { Map: 'O(n)', List: 'O(n)' },
   },
 ]
 
