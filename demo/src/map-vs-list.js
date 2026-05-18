@@ -5,7 +5,7 @@ import { benchLookup, benchInsert, benchIteration, benchGrowth } from './benchma
 
 const SLIDES = [
   'intro',
-  'uitleg-list', 'uitleg-map', 'uitleg-when', 'uitleg-impl',
+  'uitleg-collection', 'uitleg-list', 'uitleg-map', 'uitleg-when', 'uitleg-impl',
   'demo-0-ask', 'demo-0-reveal',
   'demo-1-ask', 'demo-1-reveal',
   'demo-2-ask', 'demo-2-reveal',
@@ -15,13 +15,13 @@ const SLIDES = [
 
 const SECTIONS = [
   { id: 'intro',   label: 'Introductie', from: 0,  to: 0  },
-  { id: 'uitleg',  label: 'Uitleg',      from: 1,  to: 4  },
-  { id: 'demo',    label: 'Demo',        from: 5,  to: 10 },
-  { id: 'bigo',    label: 'Big O',       from: 11, to: 11 },
-  { id: 'bronnen', label: 'Bronnen',     from: 12, to: 12 },
+  { id: 'uitleg',  label: 'Uitleg',      from: 1,  to: 5  },
+  { id: 'demo',    label: 'Demo',        from: 6,  to: 11 },
+  { id: 'bigo',    label: 'Big O',       from: 12, to: 12 },
+  { id: 'bronnen', label: 'Bronnen',     from: 13, to: 13 },
 ]
 
-const ASK_SLIDES = new Set([5, 7, 9])
+const ASK_SLIDES = new Set([6, 8, 10])
 
 const QUIZ_ROUNDS = [
   {
@@ -233,7 +233,7 @@ class MapVsList extends LitElement {
       </nav>
 
       <div class="stage">
-        <div class="card ${['bigo','uitleg-when','uitleg-impl'].includes(SLIDES[this._slide]) ? 'card-bigo' : ''}">
+        <div class="card ${['bigo','uitleg-when','uitleg-impl','uitleg-collection'].includes(SLIDES[this._slide]) ? 'card-bigo' : ''}">
           <div class="slide">${this._renderSlide()}</div>
 
           ${!isAsk ? html`
@@ -264,7 +264,8 @@ class MapVsList extends LitElement {
 
   _renderSlide() {
     const id = SLIDES[this._slide]
-    if (id === 'intro')         return this._intro()
+    if (id === 'intro')             return this._intro()
+    if (id === 'uitleg-collection') return this._uitlegCollection()
     if (id === 'uitleg-list')   return this._uitlegList()
     if (id === 'uitleg-map')    return this._uitlegMap()
     if (id === 'uitleg-when')   return this._uitlegWhen()
@@ -301,6 +302,54 @@ class MapVsList extends LitElement {
 
   // ── Uitleg ────────────────────────────────────────────────────────────────
 
+  _uitlegCollection() {
+    return html`
+      <div class="cf-slide fade">
+        <div class="slide-tag">Uitleg</div>
+        <h2>Het Collections Framework</h2>
+        <p class="cf-intro">Java groepeert datastructuren in het <strong>Collections Framework</strong>. Een collection is een object wat meerdere objecten opslaat. We gaan het hebben over deze interfaces: <code>List</code> en <code>Map</code>.</p>
+        <div class="cf-tree">
+          <div class="cf-root-node">Collections Framework</div>
+          <div class="cf-connectors">
+            <div class="cf-connector-line"></div>
+            <div class="cf-connector-h"></div>
+          </div>
+          <div class="cf-branches">
+            <div class="cf-branch">
+              <span class="cf-iface-tag">interface</span>
+              <div class="cf-branch-node list-branch">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <line x1="4" y1="7" x2="18" y2="7"/>
+                  <line x1="4" y1="11" x2="18" y2="11"/>
+                  <line x1="4" y1="15" x2="18" y2="15"/>
+                </svg>
+                List
+              </div>
+              <div class="cf-props">
+                <span class="cf-prop">Gericht op volgorde</span>
+              </div>
+            </div>
+            <div class="cf-branch">
+              <span class="cf-iface-tag">interface</span>
+              <div class="cf-branch-node map-branch">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="8" height="8" rx="1.5"/>
+                  <rect x="12" y="2" width="8" height="8" rx="1.5"/>
+                  <rect x="2" y="12" width="8" height="8" rx="1.5"/>
+                  <rect x="12" y="12" width="8" height="8" rx="1.5"/>
+                </svg>
+                Map
+              </div>
+              <div class="cf-props">
+                <span class="cf-prop">Gericht op key en value koppeling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+
   _uitlegList() {
     return html`
       <div class="uitleg-slide fade">
@@ -330,7 +379,7 @@ namen.contains(<span class="s">"Tom"</span>); <span class="cm">// O(n) scan</spa
 
 System.out.println(
     String.join(<span class="s">","</span>, namen));
-<span class="cm">// Output: Anna, Tom, Anna</span></pre>
+<span class="cm">// Output: Anna,Tom,Anna</span></pre>
         </div>
       </div>
     `
@@ -819,6 +868,42 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
     pre .s  { color: #a5d6ff; }
     pre .n  { color: #f78c6c; }
     pre .cm { color: #666; }
+
+    /* ── Collection Framework ── */
+    .cf-slide { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+    .cf-slide h2 { font-size: 1.7rem; font-weight: 800; letter-spacing: -.02em; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
+    .cf-intro { font-size: 1rem; color: var(--muted3); line-height: 1.6; }
+    .cf-tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .cf-root-node {
+      padding: 10px 28px; background: var(--s3); border: 1px solid var(--border);
+      border-radius: 10px; font-size: .9rem; font-weight: 700; color: var(--muted3);
+      letter-spacing: .03em;
+    }
+    .cf-connectors { display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .cf-connector-line { width: 1px; height: 20px; background: var(--border); }
+    .cf-connector-h { width: 55%; height: 1px; background: var(--border); }
+    .cf-branches { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+    .cf-branch {
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+      padding: 24px 20px; border: 1px solid var(--border); border-radius: 14px;
+      background: var(--s2);
+    }
+    .cf-branch-node {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -.01em;
+    }
+    .list-branch { color: var(--blue); }
+    .map-branch  { color: var(--accent); }
+    .cf-iface-tag {
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted2); background: var(--s3); border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 4px; font-family: monospace;
+    }
+    .cf-props { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    .cf-prop {
+      font-size: .88rem; color: var(--muted3); padding: 7px 14px;
+      background: var(--s3); border-radius: 7px; text-align: center;
+    }
 
     /* ── Wanneer ── */
     .when-slide { flex: 1; display: flex; flex-direction: column; gap: 20px; }
