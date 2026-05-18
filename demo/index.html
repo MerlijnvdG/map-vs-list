@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Map vs List — Team 418</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #080808;
+      --surface: #101010;
+      --s2:      #161616;
+      --s3:      #1d1d1d;
+      --border:  #1f1f1f;
+      --text:    #f0f0f0;
+      --muted:   #3a3a3a;
+      --muted2:  #888;
+      --muted3:  #aaa;
+      --green:   #4ade80;
+      --red:     #f87171;
+      --accent:  #818cf8;
+      --accent2: #6366f1;
+      --blue:    #60a5fa;
+      --yellow:  #fbbf24;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    map-vs-list { display: contents; }
+  </style>
+</head>
+<body>
+  <map-vs-list></map-vs-list>
+  <script type="module" src="/src/map-vs-list.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+demo/node_modules/
+demo/dist/
+.claude/
+.idea
+*.iws
+*.iml
+*.ipr
+.vscode/
