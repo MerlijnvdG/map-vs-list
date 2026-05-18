@@ -1,6 +1,6 @@
 # Map vs List
 
-Een interactieve presentatie/demo voor Team 418 die uitlegt wanneer je een `Map` of een `List` gebruikt in Java. Gebouwd als browser-based web component met Lit en Vite.
+Een interactieve presentatie/demo van Team 418 die uitlegt wanneer je een `Map` of een `List` gebruikt in Java. Gebouwd als browser-based web component met Lit en Vite.
 
 ## Wat zit erin
 
@@ -23,23 +23,6 @@ npm run dev
 ```
 
 Open daarna de URL die Vite toont in je browser (standaard `http://localhost:5173`).
-
-## Bouwen voor productie
-
-```bash
-cd demo
-npm run build
-```
-
-De gebouwde bestanden staan in `demo/dist/`.
-
-## Navigeren
-
-| Actie | Knop |
-|---|---|
-| Volgende slide | Volgende / pijltje rechts |
-| Vorige slide | Vorige / pijltje links |
-| Sectie springen | Knoppen bovenin de navigatiebalk |
 
 ## Stack
 
