@@ -45,7 +45,7 @@ const QUIZ_ROUNDS = [
     scenario: 'Je wil de totaalomzet berekenen door alle bedragen in een collectie op te tellen.',
     bench: benchIteration,
     winner: 'List',
-    explanation: 'Een List staat netjes op een rij in het geheugen, dus de CPU kan grote blokken in één keer inladen. Een Map heeft elk element verspreid liggen met een extra verwijzing ertussen, en dat maakt itereren een stuk trager.',
+    explanation: 'Een List staat netjes op een rij in het geheugen, dus de CPU kan het snel doorlopen. Een Map heeft elk element verspreid liggen met een extra verwijzing ertussen, en dat maakt itereren een stuk trager.',
     bigO: { Map: 'O(n)', List: 'O(n)*' },
   },
 ]
