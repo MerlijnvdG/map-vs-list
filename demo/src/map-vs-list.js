@@ -654,36 +654,74 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
   _bronnen() {
     const refs = [
       {
-        title: 'Java SE 21 — Class HashMap',
-        meta: 'Officiële Oracle documentatie voor HashMap: complexiteitsgaranties, interne werking en alle methodes.',
-        url: 'https://docs.oracle.com/en/java/se/21/docs/api/java.base/java/util/HashMap.html',
+        kind: 'Officiële docs',
+        author: 'Oracle',
+        year: '2023',
+        title: 'HashMap (Java SE 21 & JDK 21)',
+        container: 'Oracle Corporation [API-documentatie]',
+        host: 'docs.oracle.com',
+        why: 'Officiële O(1)-garanties voor get/put en de load factor — basis voor de Big-O-slide.',
+        url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/HashMap.html',
       },
       {
-        title: 'Java SE 21 — Class ArrayList',
-        meta: 'Officiële Oracle documentatie voor ArrayList: wanneer O(1) vs O(n) van toepassing is en resizing-gedrag.',
-        url: 'https://docs.oracle.com/en/java/se/21/docs/api/java.base/java/util/ArrayList.html',
+        kind: 'Officiële docs',
+        author: 'Oracle',
+        year: '2023',
+        title: 'ArrayList (Java SE 21 & JDK 21)',
+        container: 'Oracle Corporation [API-documentatie]',
+        host: 'docs.oracle.com',
+        why: 'Amortized O(1) add, O(n) contains/indexOf en het resize-gedrag van de interne array.',
+        url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html',
       },
       {
-        title: 'Hash table — Wikipedia',
-        meta: 'Legt uit hoe een hash-functie en bucket-array zorgen dat HashMap O(1) lookup bereikt.',
-        url: 'https://en.wikipedia.org/wiki/Hash_table',
+        kind: 'Broncode',
+        author: 'OpenJDK',
+        year: '2023',
+        title: 'HashMap.java — Implementation notes',
+        container: 'OpenJDK jdk-21 repository [broncode]',
+        host: 'github.com/openjdk',
+        why: 'TREEIFY_THRESHOLD = 8: buckets worden rood-zwarte bomen, daarom worst case O(log n) i.p.v. O(n).',
+        url: 'https://github.com/openjdk/jdk21/blob/master/src/java.base/share/classes/java/util/HashMap.java',
       },
       {
-        title: 'Big-O Cheat Sheet',
-        meta: 'Overzicht van tijdcomplexiteiten voor alle gangbare datastructuren en algoritmen.',
-        url: 'https://www.bigocheatsheet.com/',
+        kind: 'Leerboek',
+        author: 'Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C.',
+        year: '2009',
+        title: 'Introduction to algorithms (3rd ed.), hfst. 11 "Hash Tables"',
+        container: 'MIT Press',
+        host: 'mitpress.mit.edu',
+        why: 'Academische afleiding waarom hashing met uniforme verdeling verwacht O(1) lookups oplevert.',
+        url: 'https://mitpress.mit.edu/9780262033848/introduction-to-algorithms/',
+      },
+      {
+        kind: 'Tutorial',
+        author: 'Baeldung',
+        year: '2024',
+        title: 'A guide to Java HashMap',
+        container: 'Baeldung [online tutorial]',
+        host: 'baeldung.com',
+        why: 'Praktische uitleg van buckets, collisies en treeification — toegankelijke secundaire bron.',
+        url: 'https://www.baeldung.com/java-hashmap',
       },
     ]
     return html`
       <div class="bronnen-slide fade">
         <div class="slide-tag">Bronnen</div>
-        <h2>Referenties</h2>
-        <ul class="ref-list">
+        <div class="bronnen-head">
+          <h2>Referenties</h2>
+          <span class="bronnen-style">APA 7 · ${refs.length} bronnen</span>
+        </div>
+        <ul class="ref-grid">
           ${refs.map(r => html`
-            <li class="ref-item">
-              <a class="ref-link" href="${r.url}" target="_blank" rel="noopener">
-                <span class="ref-title">${r.title}</span>
-                <span class="ref-meta">${r.meta}</span>
+            <li class="ref-card">
+              <a class="ref-card-link" href="${r.url}" target="_blank" rel="noopener">
+                <div class="ref-card-top">
+                  <span class="ref-kind">${r.kind}</span>
+                  <span class="ref-host">${r.host} ↗</span>
+                </div>
+                <div class="ref-card-title">${r.title}</div>
+                <div class="ref-card-apa">${r.author} (${r.year}). <em>${r.title}</em>. ${r.container}.</div>
+                <div class="ref-card-why">${r.why}</div>
               </a>
             </li>
           `)}
@@ -1051,20 +1089,46 @@ scores.containsKey(<span class="s">"Tom"</span>); <span class="cm">// → true, 
     .bt-why { font-size: .75rem; color: var(--muted2); }
 
     /* ── Bronnen ── */
-    .bronnen-slide { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-    .bronnen-slide h2 { font-size: 1.7rem; font-weight: 800; letter-spacing: -.02em; margin-top: 6px; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
-    .ref-list { list-style: none; display: flex; flex-direction: column; flex: 1; justify-content: space-evenly; gap: 10px; }
-    .ref-item {
-      padding: 14px 18px; background: var(--s2); border: 1px solid var(--border);
-      border-radius: 10px; transition: border-color .15s, background .15s;
+    .bronnen-slide { flex: 1; display: flex; flex-direction: column; gap: 16px; min-height: 0; }
+    .bronnen-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 6px; }
+    .bronnen-slide h2 { font-size: 1.7rem; font-weight: 800; letter-spacing: -.02em; font-family: 'Bricolage Grotesque', system-ui, sans-serif; margin: 0; }
+    .bronnen-style { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted2); }
+
+    .ref-grid {
+      list-style: none; margin: 0; padding: 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      flex: 1; min-height: 0;
     }
-    .ref-item:hover { border-color: var(--accent); background: var(--s3); }
-    .ref-link {
-      display: flex; flex-direction: column; gap: 3px;
+    .ref-card {
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color .15s, background .15s, transform .15s;
+      overflow: hidden;
+    }
+    .ref-card:hover {
+      border-color: var(--accent);
+      background: var(--s3);
+      transform: translateY(-1px);
+    }
+    .ref-card-link {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 14px 16px;
       text-decoration: none;
+      height: 100%;
     }
-    .ref-title { font-size: .88rem; font-weight: 600; color: var(--text); }
-    .ref-meta  { font-size: .78rem; color: var(--muted2); }
+    .ref-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .ref-kind {
+      font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      padding: 3px 8px; border-radius: 999px;
+    }
+    .ref-host { font-size: .7rem; color: var(--muted2); font-family: ui-monospace, 'JetBrains Mono', monospace; }
+    .ref-card-title { font-size: .95rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; line-height: 1.3; }
+    .ref-card-apa { font-size: .74rem; color: var(--muted3); line-height: 1.4; font-family: 'Source Serif Pro', Georgia, serif; }
+    .ref-card-apa em { font-style: italic; }
+    .ref-card-why { font-size: .76rem; color: var(--muted2); line-height: 1.45; margin-top: auto; padding-top: 4px; border-top: 1px dashed var(--border); }
     .closing {
       margin-top: auto; text-align: center;
       padding: 20px; background: var(--s2); border: 1px solid var(--border);
